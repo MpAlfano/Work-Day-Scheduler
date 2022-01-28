@@ -3,16 +3,6 @@ let dateDisplayEl = $('#currentDay');
 let saveButtonEl = $('.time-block')
 let pastPresentFuture = document.querySelectorAll(".description");
 const pastPresentFutureArr = Array.from(pastPresentFuture);
-
-let timeNow;
-// remove later
-
-//Function to track current date and time
-
-function displayTime() {
-    timeNow = moment().format('k');
-    timeDisplayEl.text(timeNow);
-}
   
 //Function to display date at top of page
 function displayDate() {
@@ -20,28 +10,27 @@ function displayDate() {
     dateDisplayEl.text(dateRightNow);
 }
 
-//Function to color in the times if passed
+//Function to color in the times for past, current and future
 for (i=0; i < pastPresentFutureArr.length; i++) {
   let pastPresentFutureEl = pastPresentFutureArr[i];
-  let currentTime = parseInt(moment().format("k"));
+  let timeNow = parseInt(moment().format("k"));
   let pastPresentFutureVal = parseInt(pastPresentFutureEl.getAttribute("id"));
   console.log(pastPresentFutureEl.getAttribute("id"));
-  console.log(currentTime)
+  console.log(timeNow)
 
-  if (pastPresentFutureVal == currentTime) {
+  if (pastPresentFutureVal == timeNow) {
     pastPresentFutureEl.setAttribute('class', "description col-md-10 present");
     console.log(pastPresentFutureVal)
-  } else if (pastPresentFutureVal < currentTime) {
+  } else if (pastPresentFutureVal < timeNow) {
     pastPresentFutureEl.setAttribute('class', "description col-md-10 past");
     console.log(pastPresentFutureVal)
-  } else if (pastPresentFutureVal > currentTime) {
+  } else if (pastPresentFutureVal > timeNow) {
     pastPresentFutureEl.setAttribute('class', "description col-md-10 future");
     console.log(pastPresentFutureVal)
-    console.log(currentTime)
+    console.log(timeNow)
   }
 
 }
-
 
 //Function to retrieve local storage
 //Function to sort local storage into timeblocks
@@ -70,16 +59,12 @@ for (let i = 9; i < 18; i++ ) {
   console.log(storageText)
 }
 
-
 //Function to run when save is clicked on
 let saveTargetButton = function(event) {
   let saveTarget = (event.target.id);
   let saveText = "";
 
   console.log(saveTarget)
-  
-
-
 
   //use .split('') for \ to try to get to return
   if (saveTarget == 9) {
@@ -101,9 +86,7 @@ let saveTargetButton = function(event) {
   } else if (saveTarget == 17) {
     saveText = document.getElementById('17').value  
   }
-
   localStorage.setItem(saveTarget, (saveText));
-
 }  
 //Event listener for click on saveblock
 saveButtonEl.on('click', '.save-btn', saveTargetButton);
@@ -112,4 +95,3 @@ saveButtonEl.on('click', '.save-btn', saveTargetButton);
 $(function init() {
     displayDate();
 });
-setInterval(displayTime, 1000);
