@@ -14,4 +14,4 @@ This is an image preview of the page.
 
 ![Work Day planner page](./assets/images/demo.png)
 
-[View Website Here]https://mpalfano.github.io/Work-Day-Scheduler/
+[View Website Here](https://mpalfano.github.io/Work-Day-Scheduler/)
